@@ -38,6 +38,11 @@ public class Test {
         album.setArtist("artist1");
         album.setName("yoojin");
         album.setPrice(1000);
+
+//        album.setId(1L);
+// -> javax.persistence.PersistenceException: org.hibernate.PersistentObjectException: detached entity passed to persist: entity.Album
+//        <- Item id에 @GeneratedValue 를 명시했기 때문에 id를 지정하면 에러 발생
+
         em.persist(album);
 
         Movie movie = new Movie();
