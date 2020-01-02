@@ -1,8 +1,8 @@
 package start;
 
-import entity.Album;
-import entity.Book;
-import entity.Movie;
+import strategy.joined.Album;
+import strategy.joined.Book;
+import strategy.joined.Movie;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

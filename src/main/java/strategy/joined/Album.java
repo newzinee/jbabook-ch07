@@ -1,4 +1,4 @@
-package entity;
+package strategy.joined;
 
 import lombok.Getter;
 import lombok.Setter;

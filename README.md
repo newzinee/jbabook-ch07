@@ -16,7 +16,7 @@
 
 ---
 
-##### 전략 매핑
+##### 조인 전략
 
 - @Inheritance(strategy = InheritanceType.JOINED): 상속 매핑은 부모 클래스에 @Inheritance 을 설정해야 한다. 매핑 전략을 지정해야 하는데, 여기서는 조인 전략을 사용
 
@@ -84,7 +84,7 @@ Hibernate:
 Hibernate: 
     call next value for hibernate_sequence
 Hibernate: 
-    /* insert entity.Album
+    /* insert Album
         */ insert 
         into
             Item
@@ -92,7 +92,7 @@ Hibernate:
         values
             (?, ?, 'A', ?)
 Hibernate: 
-    /* insert entity.Album
+    /* insert Album
         */ insert 
         into
             Album
@@ -100,7 +100,7 @@ Hibernate:
         values
             (?, ?)
 Hibernate: 
-    /* insert entity.Movie
+    /* insert Movie
         */ insert 
         into
             Item
@@ -108,7 +108,7 @@ Hibernate:
         values
             (?, ?, 'M', ?)
 Hibernate: 
-    /* insert entity.Movie
+    /* insert Movie
         */ insert 
         into
             Movie
@@ -116,7 +116,7 @@ Hibernate:
         values
             (?, ?, ?)
 Hibernate: 
-    /* insert entity.Book
+    /* insert Book
         */ insert 
         into
             Item
@@ -124,7 +124,7 @@ Hibernate:
         values
             (?, ?, 'B', ?)
 Hibernate: 
-    /* insert entity.Book
+    /* insert Book
         */ insert 
         into
             Book
@@ -150,3 +150,25 @@ Hibernate:
 특징 
 
 - JPA 표준 명세는 구분 컬럼을 사용하도록 하지만 하이버네이트를 포함한 몇몇 구현체는 구분 컬럼(@DiscriminatorColumn) 없이도 동작한다. 
+
+---
+
+##### 단일 테이블 전략
+
+단일 테이블 전략은 부모, 자식 정보 모두 합쳐진 테이블(ITEM) 하나만 사용하고, 구분 컬럼(DTYPE)으로 구분한다. 
+
+- @Inheritance(strategy = InheritanceType.SINGLE_TABLE) 사용. 
+
+장점
+
+- 조인이 필요 없음 -> 조회 성능 빠름, 조회 쿼리 단순
+
+단점
+
+- 자식 엔티티가 매핑한 컬럼은 모두 null 허용이여야 함
+
+- 단일 테이블에 모든 것을 저장하므로 테이블이 커질 수 있음. -> 조회 성능이 느려질 수 있음
+
+특징
+
+- 구분 컬럼 반드시 사용. @DiscriminatorColumn 반드시 설정해야 한다. 
