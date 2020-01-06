@@ -196,3 +196,11 @@ Hibernate:
 특징
 
 - 구분 컬럼을 사용하지 않는다.   
+
+---
+
+@MappedSuperclass :  부모 클래스는 테이블과 매핑하지 않고, 자식 클래스만 매핑하고 싶으면 사용. 
+
+- @AttributeOverrides, @AttributeOverride : 매핑 정보 재정의
+
+- @AssociationOverrides, @AssociationOverride : 연관관계 재정의

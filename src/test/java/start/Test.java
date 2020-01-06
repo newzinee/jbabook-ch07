@@ -3,6 +3,8 @@ package start;
 import strategy.joined.Album;
 import strategy.joined.Book;
 import strategy.joined.Movie;
+import strategy.mapped.Member;
+import strategy.mapped.Seller;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,7 +20,8 @@ public class Test {
         try {
             et.begin();
 
-            startJoinStrategy(em);
+//            startJoinStrategy(em);
+            startMappedSuperClass(em);
 
             et.commit();
         } catch(Exception e) {
@@ -29,6 +32,20 @@ public class Test {
         }
 
         emf.close();
+    }
+
+    // MappedSuperClass 사용. BaseEntity 테이블이 생기지 않음.
+    private static void startMappedSuperClass(EntityManager em) {
+        Member member = new Member();
+        member.setName("회원");   // 부모
+        member.setEmail("이메일");
+        em.persist(member);
+
+        Seller seller = new Seller();
+        seller.setName("판매자");  // 부모
+        seller.setShopName("상점");
+        em.persist(seller);
+
     }
 
     // 조인 전략
