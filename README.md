@@ -204,3 +204,9 @@ Hibernate:
 - @AttributeOverrides, @AttributeOverride : 매핑 정보 재정의
 
 - @AssociationOverrides, @AssociationOverride : 연관관계 재정의
+
+- @MappedSuperclass 로 만든 클래스는 엔티티가 아님. -> em.find(), JPQL 사용 못 함.
+
+- 이 클래스는 직접 사용할 일은 거의 없으므로 추상 클래스로 만드는 것을 권장한다. 
+
+- @MappedSuperclass 를 사용하면, 엔티티에서 공통으로 사용하는 속성을 효과적으로 관리할 수 있다. 
