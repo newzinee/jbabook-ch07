@@ -1,5 +1,7 @@
 package start;
 
+import composite.idclass.Parent;
+import composite.idclass.ParentId;
 import strategy.joined.Album;
 import strategy.joined.Book;
 import strategy.joined.Movie;
@@ -21,7 +23,8 @@ public class Test {
             et.begin();
 
 //            startJoinStrategy(em);
-            startMappedSuperClass(em);
+//            startMappedSuperClass(em);
+            startCompositeIdClassParent(em);
 
             et.commit();
         } catch(Exception e) {
@@ -32,6 +35,24 @@ public class Test {
         }
 
         emf.close();
+    }
+
+    // 복합키를 사용하는 엔티티를 저장하고 조회한다. (부모)
+    private static void startCompositeIdClassParent(EntityManager em) {
+
+        // 저장
+        Parent parent = new Parent();
+        parent.setId1("id1");
+        parent.setId2("id2");
+        parent.setName("parentName");
+        em.persist(parent);
+
+        // 조회
+        ParentId parentId = new ParentId("id1", "id2");
+        Parent findParent = em.find(Parent.class, parentId);
+
+        System.out.println("findParent: " + findParent.getId1() + ", " + findParent.getId2() + ", " + findParent.getName());
+        System.out.println("parent.equals(findParent): " + parent.equals(findParent));  // true
     }
 
     // MappedSuperClass 사용. BaseEntity 테이블이 생기지 않음.
