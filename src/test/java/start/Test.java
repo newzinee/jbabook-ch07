@@ -1,5 +1,7 @@
 package start;
 
+import composite.embeddedId.ParentEmb;
+import composite.embeddedId.ParentEmbId;
 import composite.idclass.Parent;
 import composite.idclass.ParentId;
 import strategy.joined.Album;
@@ -24,7 +26,8 @@ public class Test {
 
 //            startJoinStrategy(em);
 //            startMappedSuperClass(em);
-            startCompositeIdClassParent(em);
+//            startCompositeIdClassParent(em);
+            startCompositeEmbedParent(em);
 
             et.commit();
         } catch(Exception e) {
@@ -37,7 +40,24 @@ public class Test {
         emf.close();
     }
 
-    // 복합키를 사용하는 엔티티를 저장하고 조회한다. (부모)
+    // 복합키를 사용하는 엔티티를 저장하고 조회한다. (부모 - EmbeddedId 이용)
+    private static void startCompositeEmbedParent(EntityManager em) {
+
+        // 저장
+        ParentEmb parent = new ParentEmb();
+        ParentEmbId parentId = new ParentEmbId("id11", "id22");
+        parent.setId(parentId);
+        parent.setName("parent");
+        em.persist(parent);
+
+        // 조회
+        ParentEmb findParent = em.find(ParentEmb.class, parentId);
+
+        System.out.println("findParent: " + findParent.getId() + ", " + findParent.getName());
+        System.out.println("parent.equals(findParent): " + parent.equals(findParent));  // true
+    }
+
+    // 복합키를 사용하는 엔티티를 저장하고 조회한다. (부모 - IdClass 이용)
     private static void startCompositeIdClassParent(EntityManager em) {
 
         // 저장
