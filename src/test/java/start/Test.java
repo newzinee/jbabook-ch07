@@ -4,6 +4,10 @@ import composite.embeddedId.ParentEmb;
 import composite.embeddedId.ParentEmbId;
 import composite.idclass.Parent;
 import composite.idclass.ParentId;
+import composite2.idclass.ChildDis;
+import composite2.idclass.GrandChildDis;
+import composite2.idclass.GrandChildId;
+import composite2.idclass.ParentDis;
 import strategy.joined.Album;
 import strategy.joined.Book;
 import strategy.joined.Movie;
@@ -27,7 +31,8 @@ public class Test {
 //            startJoinStrategy(em);
 //            startMappedSuperClass(em);
 //            startCompositeIdClassParent(em);
-            startCompositeEmbedParent(em);
+//            startCompositeEmbedParent(em);
+            startComposite2IdClassParent(em);
 
             et.commit();
         } catch(Exception e) {
@@ -38,6 +43,26 @@ public class Test {
         }
 
         emf.close();
+    }
+
+    // 복합 키 식별관계 매핑 : @IdClass
+    private static void startComposite2IdClassParent(EntityManager em) {
+
+        ParentDis parent = new ParentDis();
+        parent.setId("parent1");
+        parent.setName("parentName");
+
+        ChildDis child = new ChildDis();
+        child.setParent(parent);
+        child.setName("childName");
+        child.setChildId("child1");
+
+        GrandChildDis grandChild = new GrandChildDis();
+        grandChild.setChild(child);
+        grandChild.setId("grandChild1");
+        grandChild.setName("grandChildName");
+
+        em.persist(grandChild);
     }
 
     // 복합키를 사용하는 엔티티를 저장하고 조회한다. (부모 - EmbeddedId 이용)
@@ -64,7 +89,7 @@ public class Test {
         Parent parent = new Parent();
         parent.setId1("id1");
         parent.setId2("id2");
-        parent.setName("parentName");
+        parent.setName("222parentName");
         em.persist(parent);
 
         // 조회
