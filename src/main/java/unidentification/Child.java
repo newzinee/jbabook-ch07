@@ -1,11 +1,16 @@
 package unidentification;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 /**
  * 자식
  */
-@Entity
+@Entity(name = "CHILD_UN")
+@Table(name = "CHILD_UN")
+@Getter @Setter
 public class Child {
 
     @Id @GeneratedValue

@@ -8,6 +8,8 @@ import composite2.idclass.ChildDis;
 import composite2.idclass.GrandChildDis;
 import composite2.idclass.GrandChildId;
 import composite2.idclass.ParentDis;
+import onetoone.Board;
+import onetoone.BoardDetail;
 import strategy.joined.Album;
 import strategy.joined.Book;
 import strategy.joined.Movie;
@@ -32,8 +34,9 @@ public class Test {
 //            startMappedSuperClass(em);
 //            startCompositeIdClassParent(em);
 //            startCompositeEmbedParent(em);
-            startComposite2IdClassParent(em);
-
+//            startComposite2IdClassParent(em);
+            startOneToOneIdentification(em);
+            
             et.commit();
         } catch(Exception e) {
             et.rollback();
@@ -43,6 +46,20 @@ public class Test {
         }
 
         emf.close();
+    }
+
+    // 일대일 식별관계
+    private static void startOneToOneIdentification(EntityManager em) {
+
+        Board board = new Board();
+        board.setTitle("제목");
+        em.persist(board);
+
+        BoardDetail boardDetail = new BoardDetail();
+        boardDetail.setContent("내용");
+        boardDetail.setBoard(board);
+
+        em.persist(boardDetail);
     }
 
     // 복합 키 식별관계 매핑 : @IdClass

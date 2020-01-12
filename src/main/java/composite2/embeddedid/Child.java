@@ -8,8 +8,9 @@ import javax.persistence.*;
 /**
  * 자식
  */
-@Entity
+@Entity(name = "CHILD_COM_EMB")
 @Getter @Setter
+@Table(name = "CHILD_COM_EMB")
 public class Child {
 
     @EmbeddedId

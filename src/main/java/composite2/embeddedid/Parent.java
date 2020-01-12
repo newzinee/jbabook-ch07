@@ -6,12 +6,14 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * 부모
  */
-@Entity
+@Entity(name = "PARENT_COM_EMB")
 @Getter @Setter
+@Table(name = "PARENT_COM_EMB")
 public class Parent {
 
     @Id @Column(name = "PARENT_ID")

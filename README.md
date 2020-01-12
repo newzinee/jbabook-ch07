@@ -292,3 +292,13 @@ CHILD : CHILD_ID(PK), PARENT_ID(FK), NAME
 GRANDCHILD : GRANDCHILD_ID(PK), CHILD_ID(FK), NAME
 
 비식별 관계라 복합키가 없으므로 복합키 클래스를 안만들어도 된다. 
+
+---
+
+#### 일대일 식별 관계
+
+Board : BOARD_ID(PK), title
+
+BoardDetail : BOARD_ID(PK,FK), content 
+
+부모 테이블의 기본 키가 복합키가 아니라면 자식 테이블의 기본키를 복합키로 구성하지 않아도 된다.

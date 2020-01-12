@@ -8,8 +8,9 @@ import javax.persistence.*;
 /**
  * 손자
  */
-@Entity
+@Entity(name = "GRANDCHILD_UN")
 @Getter @Setter
+@Table(name = "GRANDCHILD_UN")
 public class GrandChild {
 
     @Id @GeneratedValue
