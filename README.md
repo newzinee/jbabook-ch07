@@ -352,3 +352,23 @@ BoardDetail : BOARD_ID(PK,FK), content
    - @JoinTable 사용
    
    - 주로 다대다 관계를 일대다, 다대일 관계로 풀어내기 위해 사용
+   
+---
+
+#### 일대일 조인 테이블
+
+부모 엔티티에 @JoinColumn 대신 @JoinTable 을 사용했다. 
+
+@JoinTable 속성
+
+- name : 매핑할 조인 테이블 이름
+
+- joinColumn : 현재 엔티티를 참조하는 외래키
+
+- inverseJoinColumns : 반대방향 엔티티를 참조하는 외래키 
+
+양항뱡으로 매핑하려면, Child 엔티티에 아래 코드를 추가하면 된다. 
+```
+@OneToOne(mappedBy = "child")
+private Parent parent;
+``` 
