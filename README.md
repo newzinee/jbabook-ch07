@@ -372,3 +372,22 @@ BoardDetail : BOARD_ID(PK,FK), content
 @OneToOne(mappedBy = "child")
 private Parent parent;
 ``` 
+
+--- 
+
+#### 일대다 조인 테이블
+
+Parent 엔티티에서 @OneToMany 와 List 사용
+```
+...
+class Parent {
+...
+@OneToMany
+@JoinTable(name = "PARENT_CHILD",
+    joinColumns = @JoinColumn(name = "PARENT_ID"),
+    inverseJoinColumns = @JoinColumn(name = "CHILD_ID")
+)
+private List<Child> childs = new ArrayList<>();
+...
+}
+```
